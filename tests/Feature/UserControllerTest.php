@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Feature;
 
 use App\Http\Controllers\UserController;
 use App\Http\Requests\User\UserStoreRequest;
@@ -8,8 +8,8 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use PHPUnit\Framework\TestCase;
 use Spatie\Permission\Models\Role;
+use Tests\TestCase;
 
 /**
  * @group controller
@@ -39,7 +39,8 @@ class UserControllerTest extends TestCase
         $response->assertViewHas('users', function ($users) use ($student, $role) {
             // Проверка, что в списке пользователей отсутствует студент
             $this->assertFalse($users->contains($student));
-
+            // Проверка, что в списке пользователей есть пользователь с другой ролью
+            $this->assertTrue($users->contains($user));
             // Проверка, что в списке ролей есть только роль, отличная от 'admin'
             $roles = $users->pluck('roles')->flatten();
             $this->assertTrue($roles->contains($role));
@@ -82,26 +83,26 @@ class UserControllerTest extends TestCase
     }
 
     public function testEdit()
-    {
-        // Создание пользователя для редактирования
-        $user = User::factory()->create();
-        $role = Role::factory()->create();
-        $user->assignRole($role);
+   {
+       // Создание пользователя для редактирования
+       $user = User::factory()->create();
+       $role = Role::factory()->create();
+       $user->assignRole($role);
 
-        // Вызов метода edit() контроллера
-        $controller = new UserController();
-        $response = $controller->edit($user->id);
+       // Вызов метода edit() контроллера
+       $controller = new UserController();
+       $response = $controller->edit($user->id);
 
-        // Проверка, что метод возвращает правильные данные
-        $response->assertJson([
-            'name' => $user->name,
-            'surname' => $user->surname,
-            'email' => $user->email,
-            'patronymic' => $user->patronymic,
-            'phone' => $user->phone,
-            'role' => $role->id,
-        ]);
-    }
+       // Проверка, что метод возвращает правильные данные
+       $response->assertJson([
+           'name' => $user->name,
+           'surname' => $user->surname,
+           'email' => $user->email,
+           'patronymic' => $user->patronymic,
+           'phone' => $user->phone,
+           'role' => $role->id,
+       ]);
+   }
 
     public function testUpdate()
     {
