@@ -41,7 +41,7 @@
         <li class="side-nav-item">
             <a href="{{ route("attentions") }}" class="side-nav-link">
                 <i class="uil-rss"></i>
-                <span> Attentions </span>
+                <span> Объявление </span>
             </a>
         </li>
 
@@ -50,7 +50,7 @@
         <li class="side-nav-item">
             <a href="{{ route('schedule') }}" class="side-nav-link">
                 <i class="uil-calender"></i>
-                <span> Schedule </span>
+                <span> Расписание </span>
             </a>
         </li>
 
@@ -58,22 +58,22 @@
 
             <a data-bs-toggle="collapse" href="#sidebarEcommerce" aria-expanded="false" aria-controls="sidebarEcommerce" class="side-nav-link">
                 <i class="uil-store"></i>
-                <span> Study </span>
+                <span> Обучение </span>
                 <span class="menu-arrow"></span>
             </a>
 
             <div class="collapse" id="sidebarEcommerce">
                 <ul class="side-nav-second-level">
 
-                    <li><a href="{{ route('courses') }}">{{ __('Materials') }}</a></li>
+                    <li><a href="{{ route('courses') }}">{{ __('Учебные материалы') }}</a></li>
 
-{{--                    <li><a href="{{ route('courses.video.materials') }}"> {{ __('Video Courses') }} </a></li>--}}
+{{--                    <li><a href="{{ route('courses.video.materials') }}"> {{ __('Видео уроки') }} </a></li>--}}
 
-                    <li><a href="{{ route('tags') }}">{{ __('Tags') }}</a></li>
+                    <li><a href="{{ route('tags') }}">{{ __('Теги') }}</a></li>
 
-                    <li><a href="{{ route('courses.tests') }}">{{ __('Tests') }}</a></li>
+                    <li><a href="{{ route('courses.tests') }}">{{ __('Полезные ссылки') }}</a></li>
 
-{{--                    <li><a href="#">{{ __('Documents') }}</a></li>--}}
+{{--                    <li><a href="#">{{ __('Документы') }}</a></li>--}}
 
                 </ul>
             </div>
@@ -83,20 +83,20 @@
 
             <a data-bs-toggle="collapse" href="#sidebarTasks" aria-expanded="false" aria-controls="sidebarTasks" class="side-nav-link">
                 <i class="uil-clipboard-alt"></i>
-                <span> School </span>
+                <span> Управление </span>
                 <span class="menu-arrow"></span>
             </a>
 
             <div class="collapse" id="sidebarTasks">
                 <ul class="side-nav-second-level">
 
-                    <li><a href="{{ route('groups') }}">Groups</a></li>
+                    <li><a href="{{ route('groups') }}">Группы</a></li>
 
-                    <li><a href="{{ route('school.students') }}">Students</a></li>
+                    <li><a href="{{ route('school.students') }}">Студенты</a></li>
 
-                    <li><a href="{{ route('school.teachers') }}">Teachers</a></li>
+                    <li><a href="{{ route('school.teachers') }}">Преподаватели</a></li>
 
-                    <li><a href="{{ route('subjects') }}">{{ __('Subjects') }}</a></li>
+                    <li><a href="{{ route('subjects') }}">{{ __('Предметы') }}</a></li>
 
                 </ul>
             </div>
@@ -104,14 +104,14 @@
 
         @canany(['view users', "create users", "edit users", "delete users", 'view roles', "create roles", "edit roles", "delete roles"])
 
-            <li class="side-nav-title side-nav-item">Administration</li>
+            <li class="side-nav-title side-nav-item">Администрация</li>
 
 
             @canany(['view users', "create users", "edit users", "delete users"])
                 <li class="side-nav-item">
                     <a href="{{ route('applications') }}" class="side-nav-link">
                         <i class="uil-users-alt"></i>
-                        <span> Applications </span>
+                        <span> Заявки </span>
                     </a>
                 </li>
             @endcanany
@@ -120,7 +120,7 @@
                 <li class="side-nav-item">
                     <a href="{{ route('users') }}" class="side-nav-link">
                         <i class="uil-users-alt"></i>
-                        <span> Users </span>
+                        <span> Пользователи </span>
                     </a>
                 </li>
             @endcanany
@@ -130,7 +130,7 @@
                 <li class="side-nav-item">
                     <a href="{{ route('roles') }}" class="side-nav-link">
                         <i class="mdi mdi-robot"></i>
-                        <span> Roles </span>
+                        <span> Роль </span>
                     </a>
                 </li>
 
@@ -140,12 +140,7 @@
 
 </ul>
 
-<div class="help-box help-box-light text-center">
-<img src="{{ asset("assets/images/help-icon.svg") }}" height="90" alt="Helper Icon Image" />
-<h5 class="mt-3">CREATED BY WARIODDLY</h5>
-<p class="mb-3">Чтобы получить полный доступ напишите на почту</p>
-<a href="mailto: warioddly@gmail.com" class="btn btn-outline-primary btn-sm">Написать</a>
-</div>
+
 
 <div class="clearfix"></div>
 

@@ -8,7 +8,7 @@
 
         <div id="external-events" class="m-t-20">
 
-            <p class="text-muted mt-0">Drag and drop your event or click in the calendar</p>
+            <p class="text-muted mt-0">Нажмите на кнопку</p>
 
             @if (isset($groups))
                 @foreach($groups as $item)
