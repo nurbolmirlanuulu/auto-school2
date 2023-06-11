@@ -19,10 +19,10 @@ class CourseMaterials extends Model
     ];
 
 
-
     public function documents()
     {
-        return $this->belongsToMany(Document::class, 'course_material_documents');
+        $courseDocuments = CourseDocuments::where('course_material_id', $this->id)->pluck('document_id')->toArray();
+        return Documents::whereIn('id', $courseDocuments)->get();
     }
 
 
@@ -40,7 +40,6 @@ class CourseMaterials extends Model
 
     public function getAuthorNameAttribute()
     {
-        return $this->author->name . " " .  $this->author->surname;
+        return $this->author->name . " " . $this->author->surname;
     }
-
 }

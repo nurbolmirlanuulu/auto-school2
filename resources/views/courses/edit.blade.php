@@ -15,8 +15,8 @@
                     </ol>
                 </div>
                 <div class="d-flex align-items-center"  id="tooltip-back-container">
-                    <a href="{{ route('attentions') }}" class="me-2"  data-bs-container="#tooltip-back-container" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Back"><i class="uil-backward"></i></a>
-                    <h4 class="page-title">Edit Attention</h4>
+                    <a href="{{ route('courses') }}" class="me-2"  data-bs-container="#tooltip-back-container" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Back"><i class="uil-backward"></i></a>
+                    <h4 class="page-title">Edit Course</h4>
                 </div>
             </div>
         </div>
@@ -27,46 +27,75 @@
             <div class="card">
                 <div class="card-body">
 
-                    <form action="{{ route("attentions.update", $attention->id) }}" method="post">
+                    <form action="{{ route("courses.update", $course->id) }}" method="post">
                         @csrf
                         @method("PUT")
 
                         <div class="row">
                             <div class="col-12">
-    
-                                <div class="mb-3">
-                                    <label for="projectname" class="form-label">Title</label>
-                                    <input type="text" id="projectname" value="{{ $attention->title }}" name="title" class="form-control" placeholder="Enter title">
-                                </div>
-    
-                                <div class="mb-3">
-                                    <label for="project-overview" class="form-label">Overview</label>
-                                    <textarea class="form-control" id="project-overview" rows="5" name="description" placeholder="Enter some information about attention.." required>{{ $attention->description }}</textarea>
-                                </div>
-    
-                                <div class="mb-3">
-                                    <label for="badges" class="form-label">Badge</label>
-                                    <input type="text" id="badges" class="form-control" value="{{ $attention->badge }}" name="badge" placeholder="Enter badge name">
-                                </div>
-    
-                                <div class="mb-3">
-                                    <label for="badge-color" class="form-label">Badge Color</label>
-                                    <input class="form-control" id="badge-color" type="color" name="color" value="{{ $attention->color }}"  name="color" >
+
+                                <div class="col-xl-8">
+
+                                    <input type="hidden" name="content" id="hidden-content" value="{!! $course->content !!}">
+
+                                    <div class="mb-3">
+                                        <label for="projectname" class="form-label">Name</label>
+                                        <input type="text" id="projectname" class="form-control" value="{{$course->title}}" name="title" placeholder="Enter material name">
+                                    </div>
+
+
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label">Name</label>
+                                        <input type="text" id="description" class="form-control" value="{{$course->description}}" name="description" placeholder="Enter material description">
+                                    </div>
+
+
+                                    <div class="mb-3">
+                                        <label for="project-overview" class="form-label">Overview</label>
+                                        <div id="snow-editor" style="height: 300px;">{!! $course->content!!}</div>
+                                    </div>
+
+                                    <div class="mb-0">
+                                        <label for="project-overview" class="form-label">Tags</label>
+
+                                        <select class="form-control select2" data-toggle="select2" name="tag_id">
+                                            @foreach ($tags as $key => $tag)
+                                                <option  value="{{ $tag->id }}" {{$course->tag_id === $tag->id ? 'selected':''}}>{{ $tag->title }}</option>
+                                            @endforeach
+                                        </select>
+
+                                    </div>
+
                                 </div>
 
 
-                                <button type="submit" class="btn btn-primary">Create</button>
-    
-                            </div> 
-    
+                                <button type="submit" class="btn btn-primary">Update</button>
+
+                            </div>
+
                         </div>
 
 
                     </form>
 
-                </div> 
+                </div>
             </div>
         </div>
     </div>
 
 @endsection
+
+@push('header_scripts')
+    <link href="{{ asset('assets/css/vendor/quill.core.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/vendor/quill.bubble.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/vendor/quill.snow.css') }}" rel="stylesheet" type="text/css" />
+    <script src="{{ asset('assets/js/vendor/quill.min.js') }}"></script>
+@endpush
+
+@push('footer_scripts')
+    <script src="{{ asset('assets/js/pages/materials.js') }}"></script>
+    <script src="{{ asset('assets/js/vendor/dropzone.min.js') }}"></script>
+    <script>
+
+    </script>
+@endpush

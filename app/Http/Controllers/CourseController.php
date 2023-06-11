@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Courses\CourseStoreRequest;
+use App\Models\CourseDocuments;
+use App\Models\Documents;
 use Illuminate\Contracts\Support\Renderable;
 use App\Models\CourseMaterials;
 use App\Models\Tags;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
 
 class CourseController extends Controller
@@ -32,7 +35,36 @@ class CourseController extends Controller
 
     public function store(CourseStoreRequest $request): RedirectResponse
     {
+        $files = $request->file('files');
         $course = CourseMaterials::create([ ...$request->validated(), 'author_id' => auth()->id() ]);
+
+        if(isset($files) && count($files)){
+                foreach ($files as $file) {
+                    $fileName = $file->getClientOriginalName();
+                    $fileType = $file->getClientMimeType();
+                    $fileSize = $file->getSize();
+                    $fileExtension = $file->getClientOriginalExtension();
+                    $filePath =  now()->timestamp . $fileName;
+                    $path = $file->store('documents');
+
+
+
+                    $document = Documents::create(
+                        [
+                            'file_name' => $fileName,
+                            'type' => $fileType,
+                            'size' => $fileSize,
+                            'extension' => $fileExtension,
+                            'path' => $path
+                        ]
+                    );
+
+                    CourseDocuments::create([
+                        'course_material_id' => $course->id,
+                        'document_id' => $document->id
+                    ]);
+                }
+            }
         return redirect()->route('courses')->with('success', 'Course created successfully.');
     }
 

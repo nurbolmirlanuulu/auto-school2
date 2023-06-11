@@ -81,54 +81,7 @@
                                 <div class="mb-3 mt-3 mt-xl-0">
 
                                     <label for="projectname" class="mb-0">Materials</label>
-
-
-                                    <div action="/api/document/upload" method="post" class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
-                                        data-upload-preview-template="#uploadPreviewTemplate">
-                                        <div class="fallback">
-                                            <input name="file" type="file" />
-                                        </div>
-
-                                        <div class="dz-message needsclick">
-                                            <i class="h3 text-muted dripicons-cloud-upload"></i>
-                                            <h4>Drop files here or click to upload.</h4>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="dropzone-previews mt-3" id="file-previews"></div>
-
-
-                                    <div class="d-none" id="uploadPreviewTemplate">
-                                        <div class="card mt-1 mb-0 shadow-none border">
-                                            <div class="p-2">
-                                                <div class="row align-items-center">
-                                                    <div class="col-auto">
-                                                        <img data-dz-thumbnail src="#" class="avatar-sm rounded bg-light" alt="">
-                                                    </div>
-                                                    <div class="col ps-0">
-                                                        <a href="javascript:void(0);" class="text-muted fw-bold" data-dz-name></a>
-                                                        <p class="mb-0" data-dz-size></p>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <!-- Button -->
-                                                        <a href="" class="btn btn-link btn-lg text-muted" data-dz-remove>
-                                                            <i class="dripicons-cross"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div id="document_attachments">
-
-                                        @include('components.cads.document-attachments')
-                                        @include('components.cads.document-attachments')
-                                        @include('components.cads.document-attachments')
-                                    </div>
-
+                                    <input type="file" name="files[]" multiple>
 
                                 </div>
 
@@ -165,4 +118,7 @@
 @push('footer_scripts')
     <script src="{{ asset('assets/js/pages/materials.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/dropzone.min.js') }}"></script>
+    <script>
+
+    </script>
 @endpush

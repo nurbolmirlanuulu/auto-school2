@@ -28,9 +28,10 @@
                     <div class="card-body">
                         <div class="row">
 
-                            @if (!auth()->user()->hasRole('student'))
+{{--                            @if (!auth()->user()->hasRole('student'))--}}
                                 @include('schedule.fragments.sidebar')
-                            @endif
+{{--                            @endif--}}
+
                             <div class="col-lg-9">
                                 <div class="mt-4 mt-lg-0">
                                     @if(isset($group))

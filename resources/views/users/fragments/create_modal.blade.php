@@ -8,9 +8,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
             </div>
 
-            <form action="{{ route("users.store") }}" method="POST" >
+            <form action="{{ route("users.store",$user->id) }}" method="POST" >
                 @csrf
-
+                @method('POST')
                 <div class="modal-body">
 
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xxl-3 g-1 g-sm-3">
