@@ -37,7 +37,7 @@
                                     @if(isset($group))
                                         <div id="calendar"></div>
                                     @else
-                                        <h4 class="text-center">Select one group</h4>
+                                        <h4 class="text-center">Выберите группу</h4>
                                     @endif
                                 </div>
                             </div>
