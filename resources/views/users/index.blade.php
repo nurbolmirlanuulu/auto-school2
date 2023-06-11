@@ -83,8 +83,8 @@
                                                     <a href="javascript:void(0);" class="text-body fw-semibold">{{ $user->fullName }}</a>
                                                 </td>
                                                 <td> {{ $user->getRoleNames()->map(fn ($name) => __($name))->implode(', ') }}  </td>
-{{--                                                <td> {{ $user->email }} </td>--}}
-{{--                                                <td> {{ $user->created_at }} </td>--}}
+                                                <td> {{ $user->email }} </td>
+                                                <td> {{ $user->created_at }} </td>
                                                 <td>
                                                     @can(["edit users"])
                                                         <a href="javascript:void(0);" class="editButton action-icon"
@@ -162,11 +162,11 @@
 
                         form.action = newAction;
                         var data = JSON.parse(xhr.responseText);
-                        var selectElement = document.getElementById('role');
-                        var optionValueToSelect = data.roleId;
+                        var selectElement = document.getElementById('roles_ids');
+                        var optionValueToSelect = data.role;
 
                         for (var i = 0; i < selectElement.options.length; i++) {
-                            if (selectElement.options[i].value === optionValueToSelect) {
+                            if (selectElement.options[i].value == optionValueToSelect) {
                                 selectElement.options[i].selected = true;
                                 break;
                             }

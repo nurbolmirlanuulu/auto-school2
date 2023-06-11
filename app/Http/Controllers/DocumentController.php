@@ -8,6 +8,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Documents;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller
@@ -56,6 +57,11 @@ class DocumentController extends Controller
         return redirect()->route('document.index')->with('success', 'Document created successfully.');
     }
 
+    public function download(int $id)
+    {
+        $document = Documents::where('id',$id)->first();
+        return Storage::download( $document->path);
+    }
 
 
 }

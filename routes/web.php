@@ -120,6 +120,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/update-teacher/{id}', [SchoolController::class, 'updateTeacherGroup'])->name('school.teacher.update');
         });
 
+        Route::get('download/{id}', [\App\Http\Controllers\DocumentController::class,'download'])->name('download');
+
 
 
         Route::group(['prefix' => 'documents'], function () {

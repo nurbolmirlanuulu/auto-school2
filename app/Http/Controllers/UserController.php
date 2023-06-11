@@ -23,14 +23,12 @@ class UserController extends Controller
         $roles = null;
 
         if ($user->hasRole('admin')) {
-            $users = User::query()->whereHas('roles', fn ($query) => $query->where('name', '!=', 'admin'))->get();
+            $users = User::query()->whereHas('roles', fn($query) => $query->where('name', '!=', 'admin'))->get();
             $roles = Role::all();
-        }
-        elseif (!$user->hasRole('student')) {
-            $users = User::query()->whereHas('roles', fn ($query) => $query->where('name', '=', 'student'))->get();
+        } elseif (!$user->hasRole('student')) {
+            $users = User::query()->whereHas('roles', fn($query) => $query->where('name', '=', 'student'))->get();
             $roles = Role::query()->where('name', '!=', 'admin')->get();
-        }
-        else abort(404);
+        } else abort(404);
 
         return view('users.index', compact('users', 'roles'));
     }
@@ -48,22 +46,20 @@ class UserController extends Controller
 
     public function edit($id)
     {
-
-       $user = User::findOrFail($id);
-        $role = Role::where('name', 'role_name')->first();
-        $roleId = $role->id;
-        dd($roleId);
-    return response()->json([
-        'name' => $user->name,
-        'surname' => $user->surname,
-        'email' => $user->email,
-        'patronymic' => $user->patronymic,
-        'phone' => $user->phone,
-        'role' => $roleId,
-    ]);
+        $user = User::findOrFail($id);
+        $role = $user->roles[0];
+        return response()->json([
+            'name' => $user->name,
+            'surname' => $user->surname,
+            'email' => $user->email,
+            'patronymic' => $user->patronymic,
+            'phone' => $user->phone,
+            'role' => $role->id,
+        ]);
 
     }
-    public function update(Request $request,$id,Role $role)
+
+    public function update(Request $request, $id, Role $role)
     {
         $user = User::query()->findOrFail($id);
 
@@ -72,11 +68,12 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->patronymic = $request->patronymic;
         $user->phone = $request->phone;
-        $user->syncRoles([$role->query()->findOrFail($request['role'])] );
+        $user->syncRoles([$role->query()->findOrFail($request['role'])]);
         $user->save();
 
         return redirect()->back()->with('success', 'User successfully updated');
     }
+
     public function profile(): Renderable
     {
         return view('profile.index')->with('user', auth()->user());
@@ -89,8 +86,7 @@ class UserController extends Controller
         if ($user) {
             $user->delete();
             return redirect()->back()->with('success', 'User successfully deleted');
-        }
-        else {
+        } else {
             return redirect()->back()->withErrors(['User not found']);
         }
     }

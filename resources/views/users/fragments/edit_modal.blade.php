@@ -52,7 +52,7 @@
 
                     <div class="mb-3">
                         <label for="role" class="form-label">Role</label>
-                        <select class="form-select" id="role" name="role" required>
+                        <select class="form-select" id="roles_ids" name="role" required>
                             @foreach($roles as $role)
                                 <option value="{{ $role->id }}">{{ __($role->name) }}</option>
                             @endforeach
