@@ -66,12 +66,14 @@
                                         <th style="width: 75px;">Action</th>
                                     </tr>
                                     </thead>
+
                                     <tbody>
 
                                         @foreach($users as $user)
                                             <tr>
                                                 <td>
                                                     <div class="form-check">
+
                                                         <input type="checkbox" class="form-check-input" id="customCheck{{$user->id}}">
                                                         <label class="form-check-label" for="customCheck{{$user->id}}">&nbsp;</label>
                                                     </div>
@@ -81,12 +83,12 @@
                                                     <a href="javascript:void(0);" class="text-body fw-semibold">{{ $user->fullName }}</a>
                                                 </td>
                                                 <td> {{ $user->getRoleNames()->map(fn ($name) => __($name))->implode(', ') }}  </td>
-                                                <td> {{ $user->email }} </td>
-                                                <td> {{ $user->created_at }} </td>
+{{--                                                <td> {{ $user->email }} </td>--}}
+{{--                                                <td> {{ $user->created_at }} </td>--}}
                                                 <td>
                                                     @can(["edit users"])
-                                                        <a href="javascript:void(0);" class="action-icon"
-                                                        data-bs-toggle="modal" data-bs-target="#edit-user-modal"
+                                                        <a href="javascript:void(0);" class="editButton action-icon"
+                                                        data-bs-toggle="modal" id="editButton" data-user-id="{{$user->id}}" data-bs-target="#edit-modal"
                                                         > <i class="mdi mdi-square-edit-outline"></i></a>
                                                     @endcan
                                                     @can(["delete users"])
@@ -142,3 +144,45 @@
 
     <script src="{{ asset("assets/js/pages/users.js") }}"></script>
 @endpush
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var editButtons = document.getElementsByClassName("editButton");
+
+        for (var i = 0; i < editButtons.length; i++) {
+            editButtons[i].addEventListener("click", function() {
+                var userId = this.getAttribute("data-user-id");
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "/dashboard/users/edit/" + userId);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                      let form = document.getElementById('edit-form')
+                        var newAction = "/dashboard/users/update/" + userId; // Замените "новый URL" на желаемый новый URL для отправки формы
+
+                        form.action = newAction;
+                        var data = JSON.parse(xhr.responseText);
+                        var selectElement = document.getElementById('role');
+                        var optionValueToSelect = data.roleId;
+
+                        for (var i = 0; i < selectElement.options.length; i++) {
+                            if (selectElement.options[i].value === optionValueToSelect) {
+                                selectElement.options[i].selected = true;
+                                break;
+                            }
+                        }
+                        document.getElementById("oldName").value = data.name;
+                        document.getElementById("oldSurname").value = data.surname;
+                        document.getElementById("oldEmail").value = data.email;
+                        document.getElementById("oldPatronymic").value = data.patronymic;
+                        document.getElementById("oldPhone").value = data.phone;
+
+                    } else if (xhr.readyState === 4) {
+                        console.error("Error: " + xhr.status);
+                    }
+                };
+                xhr.send();
+            });
+        }
+    });
+</script>

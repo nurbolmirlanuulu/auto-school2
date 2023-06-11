@@ -45,14 +45,14 @@ class RoleController extends Controller
     }
 
 
-    public function update(RoleUpdateRequest $request, $id): RedirectResponse
-    {
-        $role = Role::query()->findOrFail($id);
-        $role->name = $request->name;
-        $role->save();
-        $role->syncPermissions($request->permissions);
-        return redirect()->back()->with('success', 'Role successfully updated');
-    }
+//    public function update(RoleUpdateRequest $request, $id): RedirectResponse
+//    {
+//        $role = Role::query()->findOrFail($id);
+//        $role->name = $request->name;
+//        $role->save();
+//        $role->syncPermissions($request->permissions);
+//        return redirect()->back()->with('success', 'Role successfully updated');
+//    }
 
 
 
