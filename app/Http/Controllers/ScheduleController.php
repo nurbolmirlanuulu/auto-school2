@@ -21,8 +21,16 @@ class ScheduleController extends Controller
             return view('schedule.index', compact('groups', ));
         }
 
-        $groupIds = TeacherGroups::query()->where('teacher_id', auth()->user()->id)->get()->pluck('group_id');
+        if(auth()->user()->hasRole('teacher')){
+            $groupIds = TeacherGroups::query()->where('teacher_id', auth()->user()->id)->get()->pluck('group_id');
 
+            $groups = Groups::query()->whereIn('id', $groupIds)->get();
+
+            return view('schedule.index', compact('groups'));
+        }
+
+
+        $groupIds = auth()->user()->groups->pluck('group_id')->toArray();
         $groups = Groups::query()->whereIn('id', $groupIds)->get();
 
         return view('schedule.index', compact('groups'));

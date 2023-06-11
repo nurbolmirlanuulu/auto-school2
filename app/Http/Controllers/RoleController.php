@@ -8,12 +8,14 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Carbon\Carbon;
 
 class RoleController extends Controller
 {
 
     public function index(): Renderable
     {
+
         $roles = Role::query()->get();
         $permissions = Permission::query()->get();
         return view('roles.index', compact("roles", "permissions"));
@@ -45,14 +47,14 @@ class RoleController extends Controller
     }
 
 
-    public function update(RoleUpdateRequest $request, $id): RedirectResponse
-    {
-        $role = Role::query()->findOrFail($id);
-        $role->name = $request->name;
-        $role->save();
-        $role->syncPermissions($request->permissions);
-        return redirect()->back()->with('success', 'Role successfully updated');
-    }
+//    public function update(RoleUpdateRequest $request, $id): RedirectResponse
+//    {
+//        $role = Role::query()->findOrFail($id);
+//        $role->name = $request->name;
+//        $role->save();
+//        $role->syncPermissions($request->permissions);
+//        return redirect()->back()->with('success', 'Role successfully updated');
+//    }
 
 
 

@@ -120,6 +120,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/update-teacher/{id}', [SchoolController::class, 'updateTeacherGroup'])->name('school.teacher.update');
         });
 
+        Route::get('download/{id}', [\App\Http\Controllers\DocumentController::class,'download'])->name('download');
+
 
 
         Route::group(['prefix' => 'documents'], function () {
@@ -140,7 +142,9 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::group(['prefix' => 'users', 'middleware' => ['can:view users']], function () {
             Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('users');
+            Route::get('/edit/{id}',[App\Http\Controllers\UserController::class,'edit'])->name('users.edit');
             Route::post('/store', [App\Http\Controllers\UserController::class, 'store'])->name('users.store');
+            Route::patch('/update/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
             Route::delete('/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
         });
 
