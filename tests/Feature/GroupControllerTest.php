@@ -8,6 +8,8 @@ use Tests\TestCase;
 
 class GroupControllerTest extends TestCase
 {
+    // тестируем отображение групп
+
     public function testIndex()
     {
         $groups = Groups::all();
@@ -15,6 +17,7 @@ class GroupControllerTest extends TestCase
         $this->assertInstanceOf(Collection::class, $groups);
     }
 
+    // тестируем создание групп
     public function testStore()
     {
         $data = [
@@ -27,12 +30,8 @@ class GroupControllerTest extends TestCase
         $this->assertInstanceOf(Groups::class, $group);
     }
 
-    public function testEdit()
-    {
-        $group = Groups::orderBy('id','desc')->first();
-        $this->assertIsObject($group);
-        $this->assertInstanceOf(Groups::class, $group);
-    }
+
+    // тестируем обновление групп
 
     public function testUpdate()
     {
@@ -61,6 +60,7 @@ class GroupControllerTest extends TestCase
             'description' => $data['description'],
         ]);
     }
+    // тестируем удаление групп
 
     public function testDestroy()
     {

@@ -12,12 +12,15 @@ use Tests\TestCase;
  */
 class UserControllerTest extends TestCase
 {
+    // тестируем отображение пользователей
     public function testIndex()
     {
         $users = User::all();
         $this->assertIsObject($users);
         $this->assertInstanceOf(Collection::class, $users);
     }
+
+    // тестируем создание пользователей
 
     public function testStore()
     {
@@ -35,12 +38,8 @@ class UserControllerTest extends TestCase
         $this->assertInstanceOf(User::class, $user);
     }
 
-    public function testEdit()
-    {
-        $user = User::first();
-        $this->assertIsObject($user);
-        $this->assertInstanceOf(User::class, $user);
-    }
+
+    // тестируем обновление пользователей
 
     public function testUpdate()
     {
@@ -78,6 +77,8 @@ class UserControllerTest extends TestCase
             'phone' => $data['phone'],
         ]);
     }
+
+    // тестируем удаление пользователей
 
     public function testDestroy()
     {

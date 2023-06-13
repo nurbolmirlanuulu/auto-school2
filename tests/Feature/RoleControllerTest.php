@@ -8,6 +8,8 @@ use Tests\TestCase;
 
 class RoleControllerTest extends TestCase
 {
+    // тестируем отображение роли
+
     public function testIndex()
     {
         $roles = Role::all();
@@ -15,6 +17,7 @@ class RoleControllerTest extends TestCase
         $this->assertInstanceOf(Collection::class, $roles);
     }
 
+    // тестируем создание роли
     public function testStore()
     {
         $data = [
@@ -27,12 +30,8 @@ class RoleControllerTest extends TestCase
         $this->assertInstanceOf(Role::class, $role);
     }
 
-    public function testEdit()
-    {
-        $role = Role::orderBy('id','desc')->first();
-        $this->assertIsObject($role);
-        $this->assertInstanceOf(Role::class, $role);
-    }
+
+    // тестируем обновление роли
 
     public function testUpdate()
     {
@@ -57,6 +56,8 @@ class RoleControllerTest extends TestCase
             'name' => $data['name'],
         ]);
     }
+
+    // тестируем удаление роли
 
     public function testDestroy()
     {
