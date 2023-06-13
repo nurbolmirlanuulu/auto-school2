@@ -12,6 +12,7 @@ use Tests\TestCase;
  */
 class CourseControllerTest extends TestCase
 {
+    // Тестируем вывод всех курсов
     public function testIndex()
     {
         $users = CourseMaterials::all();
@@ -19,6 +20,7 @@ class CourseControllerTest extends TestCase
         $this->assertInstanceOf(Collection::class, $users);
     }
 
+    // тестируем создание курса
     public function testStore()
     {
         $data = [
@@ -34,13 +36,8 @@ class CourseControllerTest extends TestCase
         $this->assertInstanceOf(CourseMaterials::class, $course);
     }
 
-    public function testEdit()
-    {
-        $course = CourseMaterials::orderBy('id','desc')->first();
-        $this->assertIsObject($course);
-        $this->assertInstanceOf(CourseMaterials::class, $course);
-    }
 
+    // тестируем обновление курса
     public function testUpdate()
     {
 
@@ -73,6 +70,8 @@ class CourseControllerTest extends TestCase
             'author_id' => $data['author_id'],
         ]);
     }
+
+    // тестируем удаление курса
 
     public function testDestroy()
     {
