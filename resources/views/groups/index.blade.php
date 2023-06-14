@@ -61,7 +61,7 @@
                                                 <td> {{ \Illuminate\Support\Str::limit($group->description, $limit=30, '...') }} </td>
                                                 <td> {{ $group->created_at }} </td>
                                                 <td>
-{{--                                                    @can(["edit groups"])--}}
+                                                    @can(["edit groups"])
                                                         <a class="action-icon"
                                                            data-bs-toggle="modal"
                                                            data-bs-target="#edit-group-modal"
@@ -71,14 +71,14 @@
                                                         >
                                                             <i class="mdi mdi-square-edit-outline"></i>
                                                         </a>
-{{--                                                    @endcan--}}
-{{--                                                    @can(["delete groups"])--}}
+                                                    @endcan
+                                                    @can(["delete groups"])
                                                         <a class="action-icon"
                                                             href="{{ route('groups.destroy', $group->id) }}"
                                                             data-bs-toggle="modal"
                                                            data-bs-target="#delete-group-modal"
                                                         > <i class="mdi mdi-delete"></i></a>
-{{--                                                    @endcan--}}
+                                                    @endcan
 
                                                 </td>
                                             </tr>

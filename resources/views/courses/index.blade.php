@@ -27,9 +27,9 @@
     <div class="row mb-2 justify-content-between">
         <div class="col-sm-4">
 
-{{--            @canany(["create attention"])--}}
+            @canany(["create courses"])
                 <a href="{{ route('courses.create') }}" class="btn btn-danger rounded-pill mb-3"><i class="mdi mdi-plus"></i>Create Material</a>
-{{--            @endcanany--}}
+            @endcanany
 
         </div>
         <div class="col-4">

@@ -27,9 +27,9 @@
     <div class="row mb-2">
         <div class="col-sm-4">
 
-{{--            @canany(["create attention"])--}}
+            @canany(["create attention"])
                 <a href="{{ route('attentions.create') }}" class="btn btn-danger rounded-pill mb-3"><i class="mdi mdi-plus"></i> Create Attention</a>
-{{--            @endcanany--}}
+            @endcanany
 
         </div>
 
@@ -53,13 +53,13 @@
 
     </div>
 
-    
+
     <div class="row">
 
         @foreach ($attentions as $attention)
 
             @include('attentions.fragments.card', ['item' => $attention])
-            
+
         @endforeach
 
     </div>
