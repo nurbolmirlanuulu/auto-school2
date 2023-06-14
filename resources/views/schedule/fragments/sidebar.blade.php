@@ -18,11 +18,11 @@
                             <a href="{{ route('schedule.show', $item->id) }}" class="text-white ">
                                 <i class="mdi mdi-checkbox-blank-circle me-2 vertical-middle"></i>{{ $item->title }}
                             </a>
-
+                            @canany('edit schedule')
                             <a href="{{ route('schedule.edit', $item->id) }}" class="text-white ">
                                 <i class="mdi mdi-book-edit"></i>
                             </a>
-
+                            @endcanany
                         </div>
                     </div>
                 @endforeach
